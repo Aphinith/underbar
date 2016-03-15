@@ -230,12 +230,30 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+    //create varible set at true
+    var test = true;
+    //run a number of tests on collection if any of the tests passes the varible test changes to false
+    //iterate thru collection
+    _.each(collection, function(val){
+      //first test, check the iterator on collection and boolean value of iterator on collection
+      if(iterator === undefined){
+        if(Boolean(val)===false){
+          test = false;
+        }
+      }
+      else if(iterator(val) === false || !Boolean(iterator(val))){
+        test = false;
+      }
+    })
+    return test;
+
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    
   };
 
 

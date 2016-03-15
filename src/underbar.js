@@ -110,8 +110,34 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
-    
-  };
+
+    //create a variable to hold results
+    var result = [];
+    //create a variable to hold and sort the array
+    var sortedArray = array.sort();
+    console.log(sortedArray);
+    //loop thru sortedArray 
+    _.each(sortedArray, function(val, index){
+      //compare the indexes with index prior
+      if(val !== sortedArray[index -1]){
+        //push val into results
+        result.push(val);
+      }
+    })
+    return result;
+
+    //below is the test code to work on some more
+    // //create a variable call uniqued
+    // var uniqued = [];
+    // //loop through array
+    // _.each(array, function(item, index) {
+    //   //create conditional to check to see if 
+    //   if (array[_.indexOf(array, index)] !== undefined) {
+    //     uniqued.push(array[_.indexOf(array, index)]);
+    //   }
+    // return uniqued;
+    // })
+    };
 
 
   // Return the results of applying an iterator to each element.

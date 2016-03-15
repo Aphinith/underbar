@@ -253,7 +253,26 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
-    
+    //create function as default
+    var test = false;
+    console.log(iterator)
+    //create condition statement to test whether iterator was passed
+    if(iterator === undefined){
+      //loop thru collection and determine if any of the items in collection are true
+      _.each(collection, function(val){
+        if(val){
+          test = true;
+        }
+      })
+    } else {
+      _.each(collection, function(val){
+      //if iterator on val passes change test to true
+        if(iterator(val)){
+          test = true;
+        }
+      })  
+    }
+    return test;
   };
 
 

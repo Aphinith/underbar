@@ -295,6 +295,28 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
+    //iterate thru the objects
+    //create a variable to hold the new arguments
+    //add the new arguments key,value pairs to obj
+
+    //create var obj = obj
+    var obj = obj;
+    //create a variable called args to hold the new arguments
+    var args = [];
+    //iterate thru the arguments
+    for(var i = 1; i < arguments.length; i++){
+      //push all values expect for obj into args array
+      args.push(arguments[i]);
+    }
+    //iterate thru args
+    _.each(args, function(val){
+      //iterate thur the val to gain access to key value pairs inside val
+      _.each(val, function(propVal, key){
+        //heres where we will add the new key value pairs to obj
+        obj[key] = propVal
+      })
+    })
+    return obj;
   };
 
   // Like extend, but doesn't ever overwrite a key that already

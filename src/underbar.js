@@ -7,6 +7,7 @@
   // seem very useful, but remember it--if a function needs to provide an
   // iterator when the user does not pass one in, this will be handy.
   _.identity = function(val) {
+    return val;
   };
 
   /**
@@ -37,6 +38,10 @@
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
+    if (n === 0) {
+      return [];
+    }
+    return n === undefined ? array[array.length - 1] : array.slice(-n);
   };
 
   // Call iterator(value, key, collection) for each element of collection.
@@ -45,6 +50,20 @@
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
+    //conditional statement that determines whether collection is an array or not
+    if (Array.isArray(collection)) {
+      //create for loop to iterate through collection
+      for (var i = 0; i < collection.length; i++) {
+        //call iterator on collection values and index and collection itself
+        iterator(collection[i], i, collection);
+      }
+    } else {
+      //loop through object
+      for (var key in collection) {
+        //call iterator on collection
+        iterator(collection[key], key, collection);
+      }
+    }
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
@@ -66,16 +85,32 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+    //create an varible to hold results
+    var filtered = [];
+    //loop thru collection
+    _.each(collection, function(val){
+      //test to see if each value passes the test
+      if(test(val)){
+        filtered.push(val);
+      }
+    })
+    return filtered;
   };
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    var rejected = _.filter(collection, function(val){
+      //returns failed test
+      return !test(val)
+    })
+    return rejected;
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    
   };
 
 

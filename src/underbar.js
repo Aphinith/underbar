@@ -386,7 +386,28 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    //create a variable to hold arguments
+    var argHolder = {};
+    //invoke the func
+    return function (arg){
+      //check to see if arg already exists in argHolder
+      console.log('this is arg:', arg);
+      if(argHolder[arg]){
+        console.log('arg does exist!');
+        return argHolder[arg]
+      } else {
+        console.log('arg did not exist');
+        //create a varible to hold the new results from calling func
+        console.log('this is arguments:', arguments);
+        var results = func.apply(this, arguments);
+        argHolder[arg] = results;
+        console.log('this is argHolder:', argHolder)
+        return results;
+      }
+    }
+
   };
+
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.

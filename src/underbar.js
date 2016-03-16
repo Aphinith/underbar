@@ -335,7 +335,7 @@
     _.each(args, function(val){
       //iterate thur the val to gain access to key value pairs inside val
       _.each(val, function(propVal, key){
-        console.log(obj[key])
+        //console.log(obj[key])
         if (!obj.hasOwnProperty(key)){ 
         //heres where we will add the new key value pairs to obj
         obj[key] = propVal;
@@ -389,18 +389,21 @@
     //create a variable to hold arguments
     var argHolder = {};
     //invoke the func
-    return function (arg){
+    return function (arg1){
       //check to see if arg already exists in argHolder
-      console.log('this is arg:', arg);
-      if(argHolder[arg]){
+      console.log('this is arg:', arg1);
+      if(argHolder[arg1]){
         console.log('arg does exist!');
-        return argHolder[arg]
+        console.log('here is argHolder[arg]:', argHolder[arg1]);
+        console.log('here is argHolder:', argHolder);
+        return argHolder[arg1]
       } else {
         console.log('arg did not exist');
         //create a varible to hold the new results from calling func
         console.log('this is arguments:', arguments);
         var results = func.apply(this, arguments);
-        argHolder[arg] = results;
+        argHolder[arg1] = results;
+        console.log('this is results:', results);
         console.log('this is argHolder:', argHolder)
         return results;
       }
@@ -416,6 +419,20 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    //if condition that determines whether or not arguments passed
+    if (arguments.length > 2) {
+      //if arguments are passed, we want to invoke func on the arguments
+      //iterate through arguments and push them into a new array
+      //use new array as the argument to apply to func
+      var newArr = [];
+      for(var i = 2; i < arguments.length; i++){
+        newArr.push(arguments[i]);
+      }
+      setTimeout(function() {func.apply(this, newArr)}, wait);
+    } else {
+      //if arguments is less than 2, use setTimeout on calling with func and wait as our arguments
+      setTimeout(func, wait);
+    }
   };
 
 
@@ -430,6 +447,21 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    //create var called newArr identical to array
+    //create another variable called mixedArr to hold mixed array
+    //create a condition for the below
+    //generate a random number (max number is length of new Arr)
+    //push the value at index of newArr into mixedArr and then splice out that item from mixedArr
+
+
+
+
+
+    // var newArr = [];
+    // for(var i = 0; i < array.length; i++){
+    //   newArr.push(array.slice(Math.floor(Math.random() * array.length)));
+    // }
+    // return newArr;
   };
 
 

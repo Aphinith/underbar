@@ -322,7 +322,28 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
-  };
+//create var obj = obj
+    var obj = obj;
+    //create a variable called args to hold the new arguments
+    var args = [];
+    //iterate thru the arguments
+    for(var i = 1; i < arguments.length; i++){
+      //push all values expect for obj into args array
+      args.push(arguments[i]);
+    }
+    //iterate thru args
+    _.each(args, function(val){
+      //iterate thur the val to gain access to key value pairs inside val
+      _.each(val, function(propVal, key){
+        console.log(obj[key])
+        if (!obj.hasOwnProperty(key)){ 
+        //heres where we will add the new key value pairs to obj
+        obj[key] = propVal;
+      }
+      })
+    })
+    return obj;
+  };  
 
 
   /**
